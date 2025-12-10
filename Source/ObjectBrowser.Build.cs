@@ -26,7 +26,8 @@ namespace UnrealBuildTool.Rules
 					"UnrealEd",
                     "ClassViewer",
                     "PropertyEditor",
-					"WorkspaceMenuStructure"
+					"WorkspaceMenuStructure",
+                    "AssetTools",
 				}
 			);
 		}

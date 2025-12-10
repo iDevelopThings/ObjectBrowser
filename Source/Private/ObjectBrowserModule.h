@@ -21,10 +21,10 @@ public:
 
 	//~ End IModuleInterface Interface
 
-	static void ExecuteOpenObjectBrowser()
+	/*static void ExecuteOpenObjectBrowser()
 	{
 		FGlobalTabmanager::Get()->InvokeTab(ObjectBrowserTabName);
-	}
+	}*/
 
 private:
 	// Handles creating the project settings tab.

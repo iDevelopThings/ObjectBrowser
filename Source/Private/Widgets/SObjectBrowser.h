@@ -7,7 +7,7 @@
 struct FBrowserObject
 {
 public:
-	TWeakObjectPtr<UObject> Object;
+    TWeakObjectPtr<UObject> Object;
 };
 
 class IDetailsView;
@@ -18,57 +18,53 @@ class IDetailsView;
 class SObjectBrowser : public SCompoundWidget
 {
 public:
-
-	SLATE_BEGIN_ARGS(SObjectBrowser) { }
-	SLATE_END_ARGS()
+    SLATE_BEGIN_ARGS(SObjectBrowser) {}
+    SLATE_END_ARGS()
 
 public:
-
-	/**
-	 * Construct this widget
-	 *
-	 * @param InArgs The declaration data for this widget.
-	 */
-	void Construct( const FArguments& InArgs );
+    /**
+     * Construct this widget
+     *
+     * @param InArgs The declaration data for this widget.
+     */
+    void Construct(const FArguments& InArgs);
 
 public:
 
 private:
+    TSharedRef<SWidget> MakeFilterMenu();
 
-	TSharedRef<SWidget> MakeFilterMenu();
+    void AddBoolFilter(FMenuBuilder& MenuBuilder, FText Text, FText ToolTip, bool* BoolOption);
 
-	void AddBoolFilter(FMenuBuilder& MenuBuilder, FText Text, FText ToolTip, bool* BoolOption);
+    FReply OnCollectGarbage();
 
-	FReply OnCollectGarbage();
+    void RefreshList();
 
-	void RefreshList();
+    FText GetFilterClassText() const;
 
-	FText GetFilterClassText() const;
+    FReply OnClassSelectionClicked();
 
-	FReply OnClassSelectionClicked();
+    void OnNewHostTextCommited(const FText& InText, ETextCommit::Type InCommitType);
 
-	void OnNewHostTextCommited(const FText& InText, ETextCommit::Type InCommitType);
+    TSharedRef<ITableRow> HandleListGenerateRow(TSharedPtr<FBrowserObject> TransactionInfo, const TSharedRef<STableViewBase>& OwnerTable);
 
-	TSharedRef<ITableRow> HandleListGenerateRow(TSharedPtr<FBrowserObject> TransactionInfo, const TSharedRef<STableViewBase>& OwnerTable);
-
-	void HandleListSelectionChanged(TSharedPtr<FBrowserObject> TransactionInfo, ESelectInfo::Type SelectInfo);
+    void HandleListSelectionChanged(TSharedPtr<FBrowserObject> TransactionInfo, ESelectInfo::Type SelectInfo);
 
 private:
+    FText FilterText;
 
-	FText FilterText;
+    // Filters
+    FString FilterString;
+    UClass* FilterClass;
+    bool bShouldIncludeDefaultObjects;
+    bool bOnlyListDefaultObjects;
+    bool bOnlyListRootObjects;
+    bool bOnlyListGCObjects;
+    bool bIncludeTransient;
 
-	// Filters
-	FString FilterString;
-	UClass* FilterClass;
-	bool bShouldIncludeDefaultObjects;
-	bool bOnlyListDefaultObjects;
-	bool bOnlyListRootObjects;
-	bool bOnlyListGCObjects;
-	bool bIncludeTransient;
+    TArray<TSharedPtr<FBrowserObject>> LiveObjects;
 
-	TArray< TSharedPtr<FBrowserObject> > LiveObjects;
+    TSharedPtr<SListView<TSharedPtr<FBrowserObject>>> ObjectListView;
 
-	TSharedPtr< SListView< TSharedPtr<FBrowserObject> > > ObjectListView;
-
-	TSharedPtr<IDetailsView> PropertyView;
+    TSharedPtr<IDetailsView> PropertyView;
 };
