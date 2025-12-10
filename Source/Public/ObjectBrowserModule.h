@@ -9,7 +9,7 @@ static const FName ObjectBrowserTabName("ObjectBrowser");
 /**
 * Implements the ObjectBrowser module.
 */
-class FObjectBrowserModule : public IObjectBrowserModule
+class OBJECTBROWSER_API FObjectBrowserModule : public IObjectBrowserModule
 {
 public:
 
@@ -21,10 +21,10 @@ public:
 
 	//~ End IModuleInterface Interface
 
-	/*static void ExecuteOpenObjectBrowser()
+	static void ExecuteOpenObjectBrowser()
 	{
-		FGlobalTabmanager::Get()->InvokeTab(ObjectBrowserTabName);
-	}*/
+		FGlobalTabmanager::Get()->TryInvokeTab(FTabId(ObjectBrowserTabName));
+	}
 
 private:
 	// Handles creating the project settings tab.

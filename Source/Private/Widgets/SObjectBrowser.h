@@ -37,6 +37,7 @@ private:
     void AddBoolFilter(FMenuBuilder& MenuBuilder, FText Text, FText ToolTip, bool* BoolOption);
 
     FReply OnCollectGarbage();
+    FReply OnRefresh();
 
     void RefreshList();
 

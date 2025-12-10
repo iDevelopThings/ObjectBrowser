@@ -10,6 +10,7 @@
 
 #define LOCTEXT_NAMESPACE "SObjectBrowser"
 
+BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 /* SObjectBrowser interface
  *****************************************************************************/
@@ -119,6 +120,17 @@ void SObjectBrowser::Construct(const FArguments& InArgs) {
                         [
                             SNew(STextBlock)
                             .Text(LOCTEXT("CollectGarbage", "Collect Garbage"))
+                        ]
+                    ]
+                    
+                    + SHorizontalBox::Slot()
+                    .AutoWidth()
+                    [
+                        SNew(SButton)
+                        .OnClicked(this, &SObjectBrowser::OnRefresh)
+                        [
+                            SNew(STextBlock)
+                            .Text(LOCTEXT("Refresh Objects View", "Refresh"))
                         ]
                     ]
                 ]
@@ -289,6 +301,10 @@ FReply SObjectBrowser::OnCollectGarbage() {
 
     return FReply::Handled();
 }
+FReply SObjectBrowser::OnRefresh() {    
+    RefreshList();
+    return FReply::Handled();
+}
 
 
 /* SObjectBrowser callbacks
@@ -344,5 +360,5 @@ void SObjectBrowser::HandleListSelectionChanged(TSharedPtr<FBrowserObject> InIte
 
     PropertyView->SetObjects(Selection);
 }
-
+END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 #undef LOCTEXT_NAMESPACE
