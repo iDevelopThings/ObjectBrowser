@@ -2,9 +2,8 @@
 
 Unreal Engine 4 plug-in that adds a way to browse instances of UOjects in memory.
 
-Window > Developer Tools > Object Browser
-
-![Screenshot](Docs/screenshot.png)
+![Path](Docs/Path.png)
+![Preview](Docs/Preview.png)
 
 
 ## About
